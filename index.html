@@ -1,36 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Valmiel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Instagram - magostrophic</title>
   <style>
-    html,
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      height: 100%;
-      background: black;
-      overflow: hidden;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #000;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .top-bar {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 10px;
+      background-color: #1c1c1c;
+      font-size: 18px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .top-bar button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .mobile-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      background-color: #1c1c1c;
+      width: 100%;
+    }
+
+    .mobile-header img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+    }
+
+    .mobile-username {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .post {
+      width: 100%;
+    }
+
+    .video-section {
+      position: relative;
+      background-color: #000;
+      width: 100%;
+      height: 100vh;
     }
 
     video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
+    }
+
+    .play-toggle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      font-size: 32px;
+      padding: 10px 16px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .mobile-actions {
+      display: flex;
+      justify-content: flex-start;
+      background-color: #1c1c1c;
+      padding: 10px;
+      font-size: 22px;
+      width: 100%;
+      gap: 20px;
+    }
+
+    .mobile-nav {
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #000;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      font-size: 22px;
+      border-top: 1px solid #333;
     }
   </style>
 </head>
-
 <body>
-  <video autoplay muted loop playsinline>
-    <source src="https://file.garden/aG-4EJK0aGSh7J2l/Valmiel.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-</body>
+  <div class="top-bar">
+    <button onclick="history.back()">⬅</button>
+    <span>Posts</span>
+  </div>
 
+  <div class="mobile-header">
+    <img src="https://i.postimg.cc/tgp8Z1N4/20240429-214742.jpg" alt="avatar" />
+    <span class="mobile-username">magostrophic</span>
+  </div>
+
+  <div class="post">
+    <div class="video-section">
+      <video id="video" loop playsinline poster="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Instagram_logo_2022.svg/200px-Instagram_logo_2022.svg.png">
+        <source src="https://file.garden/aG-4EJK0aGSh7J2l/Valmiel.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <button class="play-toggle" onclick="togglePlay()" id="playBtn">▶</button>
+    </div>
+  </div>
+
+  <div class="mobile-actions">
+    ❤️ 💬 📤
+  </div>
+
+  <div class="mobile-nav">
+    🏠 🔍 ➕ 🎞️ 👤
+  </div>
+
+  <script>
+    const vid = document.getElementById("video");
+    const btn = document.getElementById("playBtn");
+
+    function togglePlay() {
+      if (vid.paused) {
+        vid.play();
+        vid.muted = false;
+        btn.textContent = "⏸";
+      } else {
+        vid.pause();
+        btn.textContent = "▶";
+      }
+    }
+  </script>
+</body>
 </html>
