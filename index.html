@@ -33,6 +33,16 @@
       border: none;
       cursor: pointer;
       padding: 0;
+
+      /* ✅ Remove mobile tap highlight */
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    #volume-btn:focus,
+    #volume-btn:focus-visible {
+      outline: none;
+      box-shadow: none;
     }
 
     #volume-icon {
@@ -41,6 +51,7 @@
       border-radius: 50%;
       object-fit: cover;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+      transition: opacity 0.2s ease;
     }
   </style>
 </head>
@@ -63,6 +74,7 @@
     volumeBtn.addEventListener('click', () => {
       video.muted = !video.muted;
 
+      // Optional: Adjust appearance when muted
       volumeIcon.style.opacity = video.muted ? '0.4' : '1';
     });
   </script>
