@@ -131,9 +131,7 @@
     </div>
   </div>
 
-  <video id="bg-video" autoplay muted loop playsinline preload="auto">
- 
-  </video>
+  <video id="bg-video" autoplay muted loop playsinline preload="auto"></video>
 
   <button id="volume-btn">
     <img id="volume-icon" src="https://i.postimg.cc/tgp8Z1N4/20240429-214742.jpg" alt="Volume Icon">
@@ -144,7 +142,22 @@
     const volumeBtn = document.getElementById('volume-btn');
     const volumeIcon = document.getElementById('volume-icon');
 
-    const videos = [
+    // Detect mobile device
+    function isMobileDevice() {
+      return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent);
+    }
+
+    const mobileVideos = [
+      "https://file.garden/aG-4EJK0aGSh7J2l/low/Emmafrost-Alen-low.mp4",
+      "https://file.garden/aG-4EJK0aGSh7J2l/low/Valmiel-low.mp4",
+      "https://file.garden/aG-4EJK0aGSh7J2l/low/Marika-low.mp4",
+      "https://file.garden/aG-4EJK0aGSh7J2l/low/Rangiku-low.mp4",
+      "https://file.garden/aG-4EJK0aGSh7J2l/low/Honoka-low.mp4",
+      "https://file.garden/aG-4EJK0aGSh7J2l/low/Ahri-low.mp4",
+      "https://file.garden/aG-4EJK0aGSh7J2l/low/Hinata-low.mp4"
+    ];
+
+    const desktopVideos = [
       "https://file.garden/aG-4EJK0aGSh7J2l/emmafrost-alen.mp4",
       "https://file.garden/aG-4EJK0aGSh7J2l/Valmiel.mp4",
       "https://file.garden/aG-4EJK0aGSh7J2l/Marika.mp4",
@@ -154,7 +167,9 @@
       "https://file.garden/aG-4EJK0aGSh7J2l/Hinata.mp4"
     ];
 
-    const randomVideo = videos[Math.floor(Math.random() * videos.length)];
+    const videoList = isMobileDevice() ? mobileVideos : desktopVideos;
+
+    const randomVideo = videoList[Math.floor(Math.random() * videoList.length)];
     const source = document.createElement("source");
     source.src = randomVideo;
     source.type = "video/mp4";
