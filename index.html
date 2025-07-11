@@ -33,7 +33,6 @@
       border: none;
       cursor: pointer;
       padding: 0;
-
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
     }
@@ -52,12 +51,84 @@
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
       transition: opacity 0.2s ease;
     }
+
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    .shapes {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .shape {
+      animation: bounce 1.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+      transform-origin: center;
+    }
+
+    .circle {
+      width: 40px;
+      height: 40px;
+      background: #0096FF;
+      border-radius: 50%;
+      animation-delay: 0s;
+    }
+
+    .triangle {
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 35px solid #FF00FF;
+      animation-delay: 0.2s;
+    }
+
+    .square {
+      width: 40px;
+      height: 40px;
+      background: #FCF55F;
+      animation-delay: 0.4s;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-20px) scale(1.15);
+        opacity: 0.8;
+      }
+    }
   </style>
 </head>
 
 <body>
+  <div id="loading-screen">
+    <div class="shapes">
+      <div class="shape circle"></div>
+      <div class="shape triangle"></div>
+      <div class="shape square"></div>
+    </div>
+  </div>
+
   <video id="bg-video" autoplay muted loop playsinline preload="auto">
-    
+
   </video>
 
   <button id="volume-btn">
@@ -78,12 +149,15 @@
     ];
 
     const randomVideo = videos[Math.floor(Math.random() * videos.length)];
-
     const source = document.createElement("source");
     source.src = randomVideo;
     source.type = "video/mp4";
     video.appendChild(source);
     video.load();
+
+    video.oncanplaythrough = () => {
+      document.getElementById("loading-screen").style.display = "none";
+    };
 
     volumeBtn.addEventListener('click', () => {
       video.muted = !video.muted;
