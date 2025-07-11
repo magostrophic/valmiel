@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Valmiel</title>
   <style>
     html,
@@ -13,14 +13,18 @@
       height: 100%;
       background: black;
       overflow: hidden;
+      touch-action: manipulation;
     }
 
     video {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 50%;
+      left: 50%;
+      width: auto;
+      height: auto;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
       object-fit: cover;
     }
 
@@ -52,6 +56,7 @@
       transition: opacity 0.2s ease;
     }
 
+    /* === LOADING SCREEN === */
     #loading-screen {
       position: fixed;
       top: 0;
@@ -119,22 +124,27 @@
 </head>
 
 <body>
+  <!-- Loading screen with animated shapes -->
   <div id="loading-screen">
     <div class="shapes">
       <div class="shape circle"></div>
       <div class="shape triangle"></div>
       <div class="shape square"></div>
     </div>
+    <p>Loading...</p>
   </div>
 
+  <!-- Video background -->
   <video id="bg-video" autoplay muted loop playsinline preload="auto">
-
+    <!-- Source is added dynamically -->
   </video>
 
+  <!-- Volume control button -->
   <button id="volume-btn">
     <img id="volume-icon" src="https://i.postimg.cc/tgp8Z1N4/20240429-214742.jpg" alt="Volume Icon">
   </button>
 
+  <!-- Script: random video selection + loader hide -->
   <script>
     const video = document.getElementById('bg-video');
     const volumeBtn = document.getElementById('volume-btn');
@@ -155,10 +165,12 @@
     video.appendChild(source);
     video.load();
 
+    // Hide loading screen once video is ready
     video.oncanplaythrough = () => {
       document.getElementById("loading-screen").style.display = "none";
     };
 
+    // Volume toggle
     volumeBtn.addEventListener('click', () => {
       video.muted = !video.muted;
       volumeIcon.style.opacity = video.muted ? '0.4' : '1';
