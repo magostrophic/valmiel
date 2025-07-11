@@ -142,7 +142,6 @@
     const volumeBtn = document.getElementById('volume-btn');
     const volumeIcon = document.getElementById('volume-icon');
 
-    // Detect mobile device
     function isMobileDevice() {
       return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent);
     }
@@ -158,23 +157,21 @@
     ];
 
     const desktopVideos = [
-      "https://file.garden/aG-4EJK0aGSh7J2l/emmafrost-alen.mp4",
-      "https://file.garden/aG-4EJK0aGSh7J2l/Valmiel.mp4",
-      "https://file.garden/aG-4EJK0aGSh7J2l/Marika.mp4",
-      "https://file.garden/aG-4EJK0aGSh7J2l/Rangiku.mp4",
-      "https://file.garden/aG-4EJK0aGSh7J2l/Honoka.mp4",
-      "https://file.garden/aG-4EJK0aGSh7J2l/Ahri.mp4",
-      "https://file.garden/aG-4EJK0aGSh7J2l/Hinata.mp4"
+      "https://file.garden/aG-4EJK0aGSh7J2l/high/emmafrost-alen.mp4",
+      "https://file.garden/aG-4EJK0aGSh7J2l/high/Valmiel.mp4",
+      "https://file.garden/aG-4EJK0aGSh7J2l/high/Marika.mp4",
+      "https://file.garden/aG-4EJK0aGSh7J2l/high/Rangiku.mp4",
+      "https://file.garden/aG-4EJK0aGSh7J2l/high/Honoka.mp4",
+      "https://file.garden/aG-4EJK0aGSh7J2l/high/Ahri.mp4",
+      "https://file.garden/aG-4EJK0aGSh7J2l/high/Hinata.mp4"
     ];
 
     const videoList = isMobileDevice() ? mobileVideos : desktopVideos;
 
     const randomVideo = videoList[Math.floor(Math.random() * videoList.length)];
-    const source = document.createElement("source");
-    source.src = randomVideo;
-    source.type = "video/mp4";
-    video.appendChild(source);
+    video.src = randomVideo;
     video.load();
+
 
     video.oncanplaythrough = () => {
       document.getElementById("loading-screen").style.display = "none";
