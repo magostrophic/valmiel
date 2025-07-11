@@ -58,8 +58,7 @@
 
 <body>
   <video id="bg-video" autoplay muted loop playsinline>
-    <source src="https://file.garden/aG-4EJK0aGSh7J2l/Valmiel.mp4" type="video/mp4">
-    Your browser does not support the video tag.
+    
   </video>
 
   <button id="volume-btn">
@@ -71,10 +70,24 @@
     const volumeBtn = document.getElementById('volume-btn');
     const volumeIcon = document.getElementById('volume-icon');
 
+    const videos = [
+      "https://file.garden/aG-4EJK0aGSh7J2l/emmafrost-alen.mp4",
+      "https://file.garden/aG-4EJK0aGSh7J2l/Valmiel.mp4",
+      "https://file.garden/aG-4EJK0aGSh7J2l/Marika.mp4",
+      "https://file.garden/aG-4EJK0aGSh7J2l/Rangiku.mp4",
+      "https://file.garden/aG-4EJK0aGSh7J2l/Honoka.mp4"
+    ];
+
+    const randomVideo = videos[Math.floor(Math.random() * videos.length)];
+
+    const source = document.createElement("source");
+    source.src = randomVideo;
+    source.type = "video/mp4";
+    video.appendChild(source);
+    video.load();
+
     volumeBtn.addEventListener('click', () => {
       video.muted = !video.muted;
-
-      // Optional: Adjust appearance when muted
       volumeIcon.style.opacity = video.muted ? '0.4' : '1';
     });
   </script>
